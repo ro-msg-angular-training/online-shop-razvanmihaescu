@@ -1,16 +1,24 @@
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <h1>Available products</h1>
-<div class="alex">
-<ul class="products">
-<li *ngFor="let product of products"
-[class.selected]="hero == selectedHero"
-(click)="onSelect(product)">
+<div class="forcingCenter">
 
- 
-       <span class="badge">{{product.category}} </span>{{product.name}}
+<table class="table table-bordered table-dark">
+    <thead>
+       <th>Category</th>
+       <th>Name</th>
+       <th>Price</th>
+       <th>Details</th>
+    </thead>
+       <tr *ngFor="let product of products"
+[class.selected]="hero == selectedHero">
+
+ <td>{{product.category}}</td>
+ <td>{{product.name}}</td>
+ <td>{{product.price}}</td>
+ <td (click)="onSelect(product)">Click here</td>>
     
-</li>
-</ul>
-
+</tr>
+</table>
 
 <app-single-product [product]="selectedProduct"></app-single-product>
 </div>
