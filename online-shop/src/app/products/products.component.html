@@ -1,8 +1,6 @@
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<h1>Available products</h1>
-
 <div class="container">
-<table class="table ">
+   <h1 class="text-danger">Products</h1>
+<table class="table">
     <thead class="thead-dark table-bordered">
        <th scope="row">Category</th>
        <th scope="row">Name</th>
@@ -11,15 +9,14 @@
     </thead>
     <tbody>
        <tr class="bg-danger" *ngFor="let product of products"
-[class.selected]="hero == selectedHero">
+[class.selected]="product == selectedProduct">
 
  <td>{{product.category}}</td>
  <td>{{product.name}}</td>
  <td>{{product.price}}</td>
- <td (click)="onSelect(product)">Click here</td>
+ <td (click)="onSelect(product)"><a class="text-dark"[routerLink]="['/single', product.id]">Click here</a></td>
     
-</tr></tbody>
+</tr>
+</tbody>
 </table>
-
-<app-single-product [product]="selectedProduct"></app-single-product>
 </div>

@@ -8,10 +8,10 @@ import { Product } from '../product';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  products:Product[]=PRODUCTS;
+  products=PRODUCTS;
 
   selectedProduct: Product;
-
+  
   constructor() { }
 
   onSelect(product: Product): void {
