@@ -7,5 +7,7 @@
     <div><span>ID: </span>{{detailedProduct.id}}</div>
     <div><span>Category: </span>{{detailedProduct.category}}</div>
     <div><span>Name: </span>{{detailedProduct.name}}</div>
-    <div><span>Price: </span>{{detailedProduct.price}}</div>
+    <div><span>Price: </span>{{detailedProduct.price}} LEI</div>
+    <button class="btn btn-light bg-danger" (click)="onClick()">Delete</button>
+    <button class="btn btn-light bg-danger" [routerLink]="['/edit', detailedProduct.id]">Edit</button>
   </div>

@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { SingleProductComponent } from './single-product/single-product.component';
-import { ProductsComponent } from './products/products.component';
-import { EditProductComponent } from './edit-product/edit-product.component';
+import { SingleProductComponent } from './components/single-product/single-product.component';
+import { ProductsComponent } from './components/products/products.component';
+import { EditProductComponent } from './components/edit-product/edit-product.component';
+import { ShoppingCartComponent } from "./components/shopping-cart/shopping-cart.component";
 
 
 const routes: Routes = [
   { path: 'products', component: ProductsComponent },
   { path: 'single/:id',        component: SingleProductComponent },
   { path: 'edit/:id',        component: EditProductComponent },
+  { path: 'shoppingcart',        component: ShoppingCartComponent },
   { path: '', redirectTo: '/products', pathMatch: 'full' }
 ];
 

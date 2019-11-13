@@ -1,5 +1,8 @@
 <div class="container">
-   <h1 class="text-danger">Products</h1>
+      <div class="row"><h1 class="text-danger">Products</h1> <button class="btn btn-light bg-danger">Add</button></div>
+         </div>
+         
+<div class="container" *ngIf="products">
 <table class="table">
     <thead class="thead-dark table-bordered">
        <th scope="row">Category</th>
@@ -13,7 +16,7 @@
 
  <td>{{product.category}}</td>
  <td>{{product.name}}</td>
- <td>{{product.price}}</td>
+ <td>{{product.price}} LEI</td>
  <td (click)="onSelect(product)"><a class="text-dark"[routerLink]="['/single', product.id]">Click here</a></td>
     
 </tr>

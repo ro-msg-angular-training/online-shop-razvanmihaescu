@@ -1,0 +1,9 @@
+<h1 class="text-danger">Edit: </h1>
+<div>Name <input [(ngModel)]="editingProduct.name"> </div>
+<div>Category <input [(ngModel)]="editingProduct.category"> </div>
+<div>Image <input [(ngModel)]="editingProduct.image"> </div>
+<div>Price <input [(ngModel)]="editingProduct.price"> </div>
+<div>Description:
+    <textarea> {{editingProduct.description}} </textarea></div>
+<button class="btn btn-light bg-danger">Cancel</button>
+<button class="btn btn-light bg-danger" (click)="onClick()">Save</button>
