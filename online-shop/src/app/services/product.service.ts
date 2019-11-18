@@ -16,6 +16,11 @@ export class ProductService {
     this.router.navigate(['']);
   }
 
+  addProduct(body:Product)
+  {
+    return this.httpClient.post<Product>('http://localhost:3000/products',body);
+  }
+
   getProducts(): Observable<Product[]> {
     return this.httpClient.get<any>('http://localhost:3000/products');
   }

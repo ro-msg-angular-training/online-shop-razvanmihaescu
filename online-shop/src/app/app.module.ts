@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule, RoutingComponent } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -10,6 +11,7 @@ import { SingleProductComponent } from './components/single-product/single-produ
 import { ProductsComponent } from './components/products/products.component';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { AddProductComponent } from './components/add-product/add-product.component';
 
 @NgModule({
   declarations: [
@@ -18,12 +20,14 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
     ProductsComponent,
     EditProductComponent,
     RoutingComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
   providers: [],

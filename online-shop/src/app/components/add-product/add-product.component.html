@@ -1,13 +1,13 @@
-<h1 class="text-danger">{{title}}: </h1>
+<h1 class="text-danger">{{title}}</h1>
 <form [formGroup] = "formdata" (ngSubmit) = "onClickSubmit(formdata.value)">
 
 
 <div>Name <input type="text" name="name" formControlName = "name"> </div>
 <div>Category <input type="text" name="category" formControlName= "category"> </div>
 <div>Image <input type="text" name="image" formControlName= "image"> </div>
-<div>Price <input type="number" name="price" formControlName= "price"> </div>
+<div>Price <input type="text" name="price" formControlName= "price"> </div>
 <div>Description:
     <textarea  name="description" formControlName= "description">  </textarea></div>
-<input type="button" (click)="productService.goingHome()" class="btn btn-light bg-danger" value="Cancel">
-<input type="submit" class="btn btn-light bg-danger" value="Save" [disabled] = "!formdata.valid">
+<input type="reset" class="btn btn-light bg-danger" value="Cancel">
+<input type="submit" class="btn btn-light bg-danger" value="Save">
 </form>
