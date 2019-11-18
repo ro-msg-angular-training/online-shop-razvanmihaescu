@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from "../../services/product.service";
-import { Product } from '../../models/Product';
+import { ProductHeader } from '../../models/ProductHeader';
+import { OrderInput, OrderedProducts } from 'src/app/models/OrderInput';
+import { Product } from 'src/app/models/Product';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -9,15 +12,22 @@ import { Product } from '../../models/Product';
 })
 export class ShoppingCartComponent implements OnInit {
 
-  currentShoppingCart:Product[];
+  selectedProducts: OrderedProducts[] = [];
+  orderInput: OrderInput = { orderedProducts: this.selectedProducts };
+  orderedProductList: Product[]; //pun aici toate produsele comandate si apoi le display=ui in html
 
-  constructor(private productService:ProductService) { }
+  mockProducts: OrderedProducts = {
+    productId: 2,
+    quantity: 5
+  };
+
+  constructor(private productService: ProductService) { }
 
   ngOnInit() {
+  
   }
 
-  onClick()
-  {
-    this.productService.addOrder("doej",this.currentShoppingCart).subscribe(()=>this.productService.goingHome);
+  onClick() {
+    this.productService.addOrder(this.orderInput).subscribe(() => this.productService.goingHome);
   }
 }

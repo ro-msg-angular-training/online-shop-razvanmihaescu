@@ -1,13 +1,28 @@
-<div *ngIf="detailedProduct">
+<div class="container-fluid" *ngIf="detailedProduct">
 
-    <div>
+  <div class="row">
+    <div class="col-2">
+      <h2>{{detailedProduct.name}} Details</h2>
+    </div>
+    <div class="col-9">
+    </div>
+    <div class="col">
       <button class="btn btn-light bg-danger">Buy</button>
     </div>
-    <h2>{{detailedProduct.name | uppercase}} Details</h2>
-    <div><span>ID: </span>{{detailedProduct.id}}</div>
-    <div><span>Category: </span>{{detailedProduct.category}}</div>
-    <div><span>Name: </span>{{detailedProduct.name}}</div>
-    <div><span>Price: </span>{{detailedProduct.price}} LEI</div>
-    <button class="btn btn-light bg-danger" (click)="onClick()">Delete</button>
-    <button class="btn btn-light bg-danger" [routerLink]="['/edit', detailedProduct.id]">Edit</button>
+
+
   </div>
+<div><span>ID: </span>{{detailedProduct.id}}</div>
+  <div><span>Category: </span>{{detailedProduct.category}}</div>
+  <div><span>Name: </span>{{detailedProduct.name}}</div>
+  <div><span>Price: </span>{{detailedProduct.price}} LEI</div>
+  <div class="row">
+    <div class="col-6"></div>
+    <div class="col-3"><img src="{{detailedProduct.image}}"><button class="btn btn-light bg-danger" (click)="onClick()">Delete</button>
+  <button class="btn btn-light bg-danger" [routerLink]="['/edit', detailedProduct.id]">Edit</button></div>
+  </div>
+
+  
+
+  
+</div>

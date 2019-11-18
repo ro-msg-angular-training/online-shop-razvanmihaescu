@@ -9,19 +9,18 @@ import { ProductService } from '../../services/product.service';
   styleUrls: ['./single-product.component.css']
 })
 export class SingleProductComponent implements OnInit {
-  detailedProduct:Product;
-  constructor(private route: ActivatedRoute, private productService:ProductService) { }
-  
-  ngOnInit() {
-   this.productService.getProductById(this.route.snapshot.params.id).subscribe(a=>this.detailedProduct=a);
-};
+  detailedProduct: Product;
+  constructor(private route: ActivatedRoute, private productService: ProductService) { }
 
-onClick()
-{
-  this.productService
-  .deleteProduct(this.detailedProduct.id)
-  .subscribe(()=>
-    this.productService.goingHome());
-}
+  ngOnInit() {
+    this.productService.getProductById(this.route.snapshot.params.id).subscribe(a => this.detailedProduct = a);
+  };
+
+  onClick() {
+    this.productService
+      .deleteProduct(this.detailedProduct.id)
+      .subscribe(() =>
+        this.productService.goingHome());
+  }
 
 }

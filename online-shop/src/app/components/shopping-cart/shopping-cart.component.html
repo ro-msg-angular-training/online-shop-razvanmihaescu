@@ -1,2 +1,28 @@
-<p>ashopping-cart works!</p>
-<button class="btn btn-light bg-danger" (click)="onClick()">Checkout</button>
+<div class="container">
+    <div class="row">
+        <h1 class="text-danger">Shopping Cart</h1>
+        <button class="btn btn-light bg-danger" (click)="onClick()">Checkout</button>
+    </div>
+</div>
+
+<div class="container">
+    <table class="table" *ngIf="currentTableProduct">
+        <thead class="thead-dark table-bordered">
+            <th scope="row">Category</th>
+            <th scope="row">Name</th>
+            <th scope="row">Price</th>
+            <th scope="row">Quantity</th>
+            <th scope="row"></th>
+        </thead>
+        <tbody>
+            <tr class="bg-danger"  *ngFor="let product of orderedProductList"
+                [class.selected]="product == selectedProduct" >
+                <td>{{product.category}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.price}} LEI</td>
+                <td>{{product.quantity}}</td>
+                <td>Delete</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
