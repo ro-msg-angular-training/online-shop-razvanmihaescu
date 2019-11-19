@@ -1,5 +1,5 @@
 <h1 class="text-danger">{{title}}: </h1>
-<form [formGroup] = "formdata" (ngSubmit) = "onClickSubmit(formdata.value)">
+<form [formGroup] = "formGroup" (ngSubmit) = "onClickSubmit(formGroup.value)">
 
 
 <div>Name <input type="text" name="name" formControlName = "name"> </div>

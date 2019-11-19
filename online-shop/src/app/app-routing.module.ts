@@ -6,6 +6,7 @@ import { ProductsComponent } from './components/products/products.component';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
 import { ShoppingCartComponent } from "./components/shopping-cart/shopping-cart.component";
 import { AddProductComponent } from './components/add-product/add-product.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'edit/:id',        component: EditProductComponent },
   { path: 'add',        component: AddProductComponent },
   { path: 'shoppingcart',        component: ShoppingCartComponent },
-  { path: '', redirectTo: '/products', pathMatch: 'full' }
+  { path: 'login',        component: LoginComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 
 @NgModule({

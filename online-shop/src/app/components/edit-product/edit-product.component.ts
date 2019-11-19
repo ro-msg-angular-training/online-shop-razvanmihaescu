@@ -13,12 +13,12 @@ export class EditProductComponent implements OnInit {
   editingProduct;
   editingProductId;
   title: string = "Edit";
-  formdata: FormGroup;
+  formGroup: FormGroup;
 
   constructor(private route: ActivatedRoute, private productService: ProductService) { }
 
   ngOnInit() {
-    this.formdata = new FormGroup({
+    this.formGroup = new FormGroup({
       name: new FormControl(),
       category: new FormControl(),
       image: new FormControl,
@@ -30,7 +30,7 @@ export class EditProductComponent implements OnInit {
     this.editingProduct = this.productService.getProductById(this.editingProductId).subscribe(a => {
       this.editingProduct = a
 
-      this.formdata.setValue({
+      this.formGroup.setValue({
         name: this.editingProduct.name,
         category: this.editingProduct.category,
         image: this.editingProduct.image,
@@ -41,12 +41,12 @@ export class EditProductComponent implements OnInit {
     );
   };
 
-  onClickSubmit(data) {
-    this.editingProduct.name = data.name;
-    this.editingProduct.category = data.category;
-    this.editingProduct.image = data.image;
-    this.editingProduct.price = data.price;
-    this.editingProduct.description = data.description;
+  onClickSubmit(formData) {
+    this.editingProduct.name = formData.name;
+    this.editingProduct.category = formData.category;
+    this.editingProduct.image = formData.image;
+    this.editingProduct.price = formData.price;
+    this.editingProduct.description = formData.description;
     this.productService.editProduct(this.editingProduct, this.editingProductId).subscribe(() => this.productService.goingHome());
   }
 }
