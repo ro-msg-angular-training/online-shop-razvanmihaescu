@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/auth/auth.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { stringify } from 'querystring';
-import { Credentials } from 'src/app/models/Credentials';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from 'src/app/auth/auth.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Credentials} from 'src/app/models/Credentials';
+import {Router} from '@angular/router';
+import {User} from '../../models/User';
 
 @Component({
   selector: 'app-login',
@@ -11,27 +11,32 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  formGroup:FormGroup;
-  credentials:Credentials;
+  formGroup: FormGroup;
+  credentials: Credentials;
+  currentUser: User;
 
-  constructor(private authService:AuthService,private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {
+  }
 
   ngOnInit() {
-    this.formGroup=new FormGroup({
-      user:new FormControl("",Validators.required),
-      pass:new FormControl("",Validators.required)
+    this.formGroup = new FormGroup({
+      user: new FormControl('', Validators.required),
+      pass: new FormControl('', Validators.required)
     });
-    this.credentials={
-      username:"",
-      password:""
+    this.credentials = {
+      username: '',
+      password: ''
     };
   }
 
-  onClickSubmit(formData)
-  {
-    this.credentials.username=formData.user;
-    this.credentials.password=formData.pass;
+  onClickSubmit(formData) {
+    this.credentials.username = formData.user;
+    this.credentials.password = formData.pass;
 
-    this.authService.login(this.credentials).subscribe( ()=>{this.router.navigateByUrl('/products');} );
+    this.authService.login(this.credentials).subscribe(response => {
+      this.currentUser = response;
+      this.authService.isLoggedIn = true;
+      this.router.navigateByUrl('/products');
+    });
   }
 }

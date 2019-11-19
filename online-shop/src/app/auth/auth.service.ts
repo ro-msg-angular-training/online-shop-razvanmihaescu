@@ -1,18 +1,23 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Credentials } from '../models/Credentials';
-import { throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {Credentials} from '../models/Credentials';
+import {Observable, throwError} from 'rxjs';
+import {User} from '../models/User';
+import {catchError} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   isLoggedIn = false;
-  constructor(private httpClient: HttpClient) { }
 
-  login(credentials: Credentials) {
-    return this.httpClient.post("http://localhost:3000/login", credentials).pipe(catchError(this.handleError));
+  constructor(private httpClient: HttpClient, private router: Router) {
+  }
+
+  login(credentials: Credentials): Observable<User> {
+    return this.httpClient.post<any>('http://localhost:3000/login', credentials).pipe(catchError(this.handleError));
+    this.isLoggedIn = true;
   }
 
   handleError(error: HttpErrorResponse) {
@@ -22,9 +27,14 @@ export class AuthService {
       errorMessage = `Error: ${error.error.message}`;
     } else {
       // Server-side errors
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      if (error.status.valueOf() === 401) {
+        errorMessage = 'username or password is incorrect';
+      } else {
+        errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      }
     }
     window.alert(errorMessage);
+    window.location.reload();
     return throwError(errorMessage);
   }
 

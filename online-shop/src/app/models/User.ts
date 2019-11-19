@@ -1,5 +1,5 @@
-export interface Product {
-    username: string;
-    fullName: string;
-    roles: string[]; //example: List [ "user", "customer", "admin" ]   
+export interface User {
+  username: string;
+  fullName: string;
+  roles: string[]; // example: List [ "user", "customer", "admin" ]
 }

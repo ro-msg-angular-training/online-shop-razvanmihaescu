@@ -1,13 +1,14 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-dark">
-        <a class="navbar-brand text-danger">{{title}}</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-item nav-link active text-danger" href="/products">Product List <span class="sr-only">(current)</span></a>
-          </div>
-        </div>
-        <a class="btn btn-light my-2 my-sm-0 bg-danger" href="/shoppingcart">Shopping Cart</a>
-      </nav>
-      <router-outlet></router-outlet>
+<nav class="navbar navbar-expand-lg navbar-light bg-dark ">
+  <a class="navbar-brand text-danger">{{title}}</a>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active text-danger" [routerLink]="['/products']">Product List <span
+        class="sr-only">(current)</span></a>
+    </div>
+  </div>
+  <a class="btn btn-light my-2 my-sm-0 bg-danger navbar_btn" [routerLink]="['/shoppingcart']">Shopping Cart</a>
+</nav>
+<div class="mt-5">
+  <router-outlet></router-outlet>
+</div>
+

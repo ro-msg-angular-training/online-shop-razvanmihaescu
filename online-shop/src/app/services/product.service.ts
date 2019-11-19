@@ -1,24 +1,28 @@
-import { Injectable } from '@angular/core';
-import { Product } from '../models/Product';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { OrderInput } from '../models/OrderInput';
+import {Injectable} from '@angular/core';
+import {Product} from '../models/Product';
+import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {OrderInput} from '../models/OrderInput';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  constructor(private router: Router, private httpClient: HttpClient) { }
+  constructor(private router: Router, private httpClient: HttpClient) {
+  }
 
   goingHome() {
     this.router.navigate(['']);
   }
 
-  addProduct(body:Product)
-  {
-    return this.httpClient.post<Product>('http://localhost:3000/products',body);
+  goingToProductList() {
+    this.router.navigate(['/products']);
+  }
+
+  addProduct(body: Product) {
+    return this.httpClient.post<Product>('http://localhost:3000/products', body);
   }
 
   getProducts(): Observable<Product[]> {
@@ -38,6 +42,6 @@ export class ProductService {
   }
 
   addOrder(order: OrderInput) {
-    return this.httpClient.post<any>('http://localhost:3000/orders', order);//currently working on it, don't use this method pls
+    return this.httpClient.post<any>('http://localhost:3000/orders', order); // currently working on it, don't use this method pls
   }
 }

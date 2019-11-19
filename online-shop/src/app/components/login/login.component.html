@@ -1,26 +1,26 @@
-<form [formGroup]="formGroup" (ngSubmit) = "onClickSubmit(formGroup.value)">
-    <div class="jumbotron  align-items-center min-vh-100">
-  <div class="form-group row">
-    <div class="col 4"></div>
-    <div class="col-sm-4">
-      <input type="text" class="form-control" name="user" formControlName = "user" placeholder="Username">
-    </div>
-    <div class="col 4"></div>
-  </div>
-  <div class="form-group row">
+<form [formGroup]="formGroup" (ngSubmit)="onClickSubmit(formGroup.value)">
+  <div class="jumbotron  align-items-center min-vh-100">
+    <div class="form-group row">
       <div class="col 4"></div>
-    <div class="col-sm-4">
-      <input type="password" class="form-control " name="pass" formControlName = "pass" placeholder="Password">
-    </div>
-    <div class="col 4"></div>
-  </div>
- 
-  <div class="form-group row">
+      <div class="col-sm-4">
+        <input type="text" class="form-control" name="user" formControlName="user" placeholder="Username">
+      </div>
       <div class="col 4"></div>
-    <div class="col-sm-1">
-      <button type="submit" class="btn btn-light bg-danger" [disabled] = "!formGroup.valid">Login</button>
     </div>
-    <div class="col 4"></div>
+    <div class="form-group row">
+      <div class="col 4"></div>
+      <div class="col-sm-4">
+        <input type="password" class="form-control " name="pass" formControlName="pass" placeholder="Password">
+      </div>
+      <div class="col 4"></div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col 4"></div>
+      <div class="col-sm-1">
+        <button type="submit" class="btn btn-light bg-danger" [disabled]="!formGroup.valid">Login</button>
+      </div>
+      <div class="col 4"></div>
+    </div>
   </div>
-</div>
 </form>

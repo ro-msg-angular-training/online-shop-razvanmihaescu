@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ProductService } from '../../services/product.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {ProductService} from '../../services/product.service';
 
-import { FormControl, FormGroup } from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-edit-product',
@@ -12,41 +12,45 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class EditProductComponent implements OnInit {
   editingProduct;
   editingProductId;
-  title: string = "Edit";
+  title = 'Edit';
   formGroup: FormGroup;
 
-  constructor(private route: ActivatedRoute, private productService: ProductService) { }
+  constructor(private route: ActivatedRoute, private productService: ProductService) {
+  }
 
   ngOnInit() {
     this.formGroup = new FormGroup({
+      id: new FormControl(),
       name: new FormControl(),
       category: new FormControl(),
-      image: new FormControl,
+      image: new FormControl(),
       price: new FormControl(),
       description: new FormControl()
     });
 
     this.editingProductId = this.route.snapshot.params.id;
     this.editingProduct = this.productService.getProductById(this.editingProductId).subscribe(a => {
-      this.editingProduct = a
+        this.editingProduct = a;
 
-      this.formGroup.setValue({
-        name: this.editingProduct.name,
-        category: this.editingProduct.category,
-        image: this.editingProduct.image,
-        price: this.editingProduct.price,
-        description: this.editingProduct.description
-      });
-    }
+        this.formGroup.setValue({
+          id: this.editingProduct.id,
+          name: this.editingProduct.name,
+          category: this.editingProduct.category,
+          image: this.editingProduct.image,
+          price: this.editingProduct.price,
+          description: this.editingProduct.description
+        });
+      }
     );
-  };
+  }
 
   onClickSubmit(formData) {
+    this.editingProduct.id = formData.id;
     this.editingProduct.name = formData.name;
     this.editingProduct.category = formData.category;
     this.editingProduct.image = formData.image;
     this.editingProduct.price = formData.price;
     this.editingProduct.description = formData.description;
-    this.productService.editProduct(this.editingProduct, this.editingProductId).subscribe(() => this.productService.goingHome());
+    this.productService.editProduct(this.editingProduct, this.editingProductId).subscribe(() => this.productService.goingToProductList());
   }
 }

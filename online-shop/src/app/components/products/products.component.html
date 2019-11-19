@@ -1,29 +1,31 @@
-  
-
 <div class="container" *ngIf="products">
-   <div class="row">
-      <div class="col-6"><h1 class="text-danger">Products</h1></div>
-      <div class="col-6"><button class="btn btn-light bg-danger" [routerLink]="['/add']">Add</button></div>
-       
-   </div>
-   <div class="row">
-   <table class="table">
+  <div class="row">
+    <div class="col-11"><h1 class="text-danger">Products</h1></div>
+    <div class="col-1">
+      <button class="btn btn-light bg-danger" [routerLink]="['/add']">Add</button>
+    </div>
+
+    <!--    Bootstrap cards sau altceva in loc de table!!!!!!!!!!!!!-->
+  </div>
+  <div class="row">
+    <table class="table">
       <thead class="thead-dark table-bordered">
-         <th scope="row">Category</th>
-         <th scope="row">Name</th>
-         <th scope="row">Price</th>
-         <th scope="row">Details</th>
+      <th scope="row">Category</th>
+      <th scope="row">Name</th>
+      <th scope="row">Price</th>
+      <th scope="row">Details</th>
       </thead>
       <tbody>
-         <tr class="bg-danger" *ngFor="let product of products" [class.selected]="product == selectedProduct">
+      <tr class="bg-danger" *ngFor="let product of products" [class.selected]="product == selectedProduct">
 
-            <td>{{product.category}}</td>
-            <td>{{product.name}}</td>
-            <td>{{product.price}} LEI</td>
-            <td (click)="onSelect(product)"><a class="text-dark" [routerLink]="['/single', product.id]">Click here</a>
-            </td>
+        <td>{{product.category}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.price}} LEI</td>
+        <td (click)="onSelect(product)"><a class="text-dark" [routerLink]="['/single', product.id]">Click here</a>
+        </td>
 
-         </tr>
+      </tr>
       </tbody>
-   </table>
-</div></div>
+    </table>
+  </div>
+</div>
