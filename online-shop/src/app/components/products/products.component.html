@@ -1,31 +1,25 @@
-<div class="container" *ngIf="products">
-  <div class="row">
+<div class="container-fluid w-75" *ngIf="products">
+  <div class="row" style="margin-bottom: 1.5rem !important;">
     <div class="col-11"><h1 class="text-danger">Products</h1></div>
     <div class="col-1">
       <button class="btn btn-light bg-danger" [routerLink]="['/add']">Add</button>
     </div>
-
-    <!--    Bootstrap cards sau altceva in loc de table!!!!!!!!!!!!!-->
   </div>
-  <div class="row">
-    <table class="table">
-      <thead class="thead-dark table-bordered">
-      <th scope="row">Category</th>
-      <th scope="row">Name</th>
-      <th scope="row">Price</th>
-      <th scope="row">Details</th>
-      </thead>
-      <tbody>
-      <tr class="bg-danger" *ngFor="let product of products" [class.selected]="product == selectedProduct">
 
-        <td>{{product.category}}</td>
-        <td>{{product.name}}</td>
-        <td>{{product.price}} LEI</td>
-        <td (click)="onSelect(product)"><a class="text-dark" [routerLink]="['/single', product.id]">Click here</a>
-        </td>
-
-      </tr>
-      </tbody>
-    </table>
+    <div class="row">
+      <div class="card-columns " style="column-count: 4">
+        <div class="card" style="height: 500px;" *ngFor="let product of products">
+          <div class="card-body text-center">
+            <img class="card-img-top" style="width: 75% " src="{{product.image}}" alt="Card image">
+            <div class="card-body">
+              <h4 class="card-title">{{product.category}}</h4>
+              <p class="card-text">{{product.name}}</p>
+              <p class="card-text">{{product.price}} LEI</p>
+              <p class="card-text">{{product.description}}</p>
+              <a class="btn btn-primary navbar_btn bg-danger stretched-link" [routerLink]="['/single', product.id]">Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>

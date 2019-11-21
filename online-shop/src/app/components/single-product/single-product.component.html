@@ -1,13 +1,13 @@
-<div class="container-fluid" *ngIf="detailedProduct">
+<div class="container" *ngIf="detailedProduct">
 
   <div class="row">
-    <div class="col-2">
-      <h2>{{detailedProduct.name}} Details</h2>
-    </div>
     <div class="col-9">
+      <h2>{{detailedProduct.name}}</h2>
     </div>
     <div class="col">
-      <button class="btn btn-light bg-danger">Buy</button>
+    </div>
+    <div class="col-2">
+      <button class="btn btn-lg btn-light bg-danger" (click)="onClickBuy()">Buy</button>
     </div>
 
 
@@ -17,12 +17,12 @@
   <div><span>Name: </span>{{detailedProduct.name}}</div>
   <div><span>Price: </span>{{detailedProduct.price}} LEI</div>
   <div class="row">
-    <div class="col-6"></div>
-    <div class="col-3"><img src="{{detailedProduct.image}}">
-      <button class="btn btn-light bg-danger" (click)="onClick()">Delete</button>
+    <div class="col-6 mt-5">
+      <button class="btn btn-light bg-danger" (click)="onClickDelete()">Delete</button>
       <button class="btn btn-light bg-danger" [routerLink]="['/edit', detailedProduct.id]">Edit</button>
     </div>
+    <div class="col-3"><img src="{{detailedProduct.image}}"
+                            style="box-shadow: 0 4px 8px 0 rgba(2, 116, 7, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+    </div>
   </div>
-
-
 </div>

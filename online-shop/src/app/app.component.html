@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-dark ">
+<nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top">
   <a class="navbar-brand text-danger">{{title}}</a>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
@@ -8,7 +8,7 @@
   </div>
   <a class="btn btn-light my-2 my-sm-0 bg-danger navbar_btn" [routerLink]="['/shoppingcart']">Shopping Cart</a>
 </nav>
-<div class="mt-5">
+<div style="margin-top: 100px">
   <router-outlet></router-outlet>
 </div>
 

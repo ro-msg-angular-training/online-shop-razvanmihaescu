@@ -10,15 +10,7 @@ import {OrderInput} from '../models/OrderInput';
 })
 export class ProductService {
 
-  constructor(private router: Router, private httpClient: HttpClient) {
-  }
-
-  goingHome() {
-    this.router.navigate(['']);
-  }
-
-  goingToProductList() {
-    this.router.navigate(['/products']);
+  constructor(private httpClient: HttpClient) {
   }
 
   addProduct(body: Product) {
@@ -39,9 +31,5 @@ export class ProductService {
 
   editProduct(product: Product, id): Observable<Product> {
     return this.httpClient.put<Product>('http://localhost:3000/products/' + id, product);
-  }
-
-  addOrder(order: OrderInput) {
-    return this.httpClient.post<any>('http://localhost:3000/orders', order); // currently working on it, don't use this method pls
   }
 }

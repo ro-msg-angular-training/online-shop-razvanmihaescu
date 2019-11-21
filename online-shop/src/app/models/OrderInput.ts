@@ -1,9 +1,9 @@
 export interface OrderInput {
-  customer?: string;
-  orderedProducts: OrderedProducts[];
+  customer: string;
+  products: OrderedProducts[];
 }
 
-export interface OrderedProducts {
+export class OrderedProducts {
   productId: number;
   quantity: number;
 }

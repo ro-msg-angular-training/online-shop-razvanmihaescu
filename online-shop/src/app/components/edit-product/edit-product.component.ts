@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {ProductService} from '../../services/product.service';
 
 import {FormControl, FormGroup} from '@angular/forms';
+import {NavigationService} from '../../services/navigation.service';
 
 @Component({
   selector: 'app-edit-product',
@@ -15,7 +16,7 @@ export class EditProductComponent implements OnInit {
   title = 'Edit';
   formGroup: FormGroup;
 
-  constructor(private route: ActivatedRoute, private productService: ProductService) {
+  constructor(private route: ActivatedRoute, private productService: ProductService, private navigationService: NavigationService) {
   }
 
   ngOnInit() {
@@ -51,6 +52,6 @@ export class EditProductComponent implements OnInit {
     this.editingProduct.image = formData.image;
     this.editingProduct.price = formData.price;
     this.editingProduct.description = formData.description;
-    this.productService.editProduct(this.editingProduct, this.editingProductId).subscribe(() => this.productService.goingToProductList());
+    this.productService.editProduct(this.editingProduct, this.editingProductId).subscribe(() => this.navigationService.goingToProductList());
   }
 }
