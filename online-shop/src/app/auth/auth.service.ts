@@ -17,7 +17,6 @@ export class AuthService {
 
   login(credentials: Credentials): Observable<User> {
     return this.httpClient.post<any>('http://localhost:3000/login', credentials).pipe(catchError(this.handleError));
-    this.isLoggedIn = true;
   }
 
   handleError(error: HttpErrorResponse) {

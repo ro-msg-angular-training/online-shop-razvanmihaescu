@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {OrderedProducts, OrderInput} from 'src/app/models/OrderInput';
-import {Product} from 'src/app/models/Product';
+import {Cart, OrderInput} from 'src/app/models/OrderInput';
 import {ShoppingCartService} from '../../services/shopping-cart.service';
 import {NavigationService} from '../../services/navigation.service';
 import {ProductService} from '../../services/product.service';
+import {UserService} from '../../services/user.service';
+import {Product} from '../../models/Product';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -11,105 +12,97 @@ import {ProductService} from '../../services/product.service';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent implements OnInit {
-
-  convertedOrderedProducts: OrderedProducts[] = []; // this is contained in OrderInput(must convert orderedProductList to this type)
   orderInput: OrderInput = {
-    customer: 'doej',
-    products: this.convertedOrderedProducts
+    customer: '',
+    products: [] = []
   };
-  orderedProductList: Product[]; // pun aici toate produsele comandate si apoi le display=ui in html
+  currentCart: Cart[] = [];
+  productsToDisplay: Product[] = [];
 
-  constructor(private shoppingCartService: ShoppingCartService, private navigationService: NavigationService, private productService: ProductService) {
+  constructor(private shoppingCartService: ShoppingCartService, private navigationService: NavigationService,
+              private productService: ProductService, private userService: UserService) {
   }
 
   ngOnInit() {
-    this.orderedProductList = this.shoppingCartService.getSelectedProducts();
-    this.convertedOrderedProducts.push({productId: this.orderedProductList[0].id, quantity: 1});
-    for (let x of this.orderedProductList) {
-      this.convertedOrderedProducts.find(element => {
-        if (element.productId === x.id) {
-          element.quantity++;
-        } else {
-          this.convertedOrderedProducts.push({productId: x.id, quantity: 1});
-        }
+    this.userService.getCurrentUserInfos('doej').subscribe(data => {
+      this.currentCart = data.cart;
+      this.currentCart.forEach(a => {
+        this.getProduct(a.productId).subscribe(resp => this.productsToDisplay.push(resp));
       });
-      this.orderInput.products = this.convertedOrderedProducts;
-    }
+    });
   }
 
-
-  onClick() {
-    this.shoppingCartService.addOrder(this.orderInput).subscribe(() => this.navigationService.goingHome);
+  onClickCheckout() {
+    this.orderInput.products = this.currentCart;
+    this.orderInput.customer = 'doej';
+    this.shoppingCartService.addOrder(this.orderInput).subscribe(() => {
+    });
+    this.navigationService.goingToProductList();
     this.resetShoppingCart();
   }
 
+  getProduct(Id) {
+    return this.productService.getProductById(Id);
+  }
+
   resetShoppingCart() {
-    this.convertedOrderedProducts = []; // this is contained in OrderInput(must convert orderedProductList to this type)
     this.orderInput = {
-      customer: 'doej',
-      products: this.convertedOrderedProducts
+      customer: '',
+      products: [] = []
     };
-    this.orderedProductList = [];
+    this.currentCart = [];
+    this.productsToDisplay = [];
+    this.updateCart([]);
   }
 
-  getProductName(Id): string {
-    let result = '';
-    this.orderedProductList.find(element => {
-      if (element.id === Id) {
-        result = element.name;
+  getProductQuantity(Id): number {
+    let quantity = null;
+    this.currentCart.find(element => {
+      if (element.productId === Id) {
+        quantity = element.quantity;
       }
     });
-    return result;
-  }
-
-  getProductImage(Id): string {
-    let result = '';
-    this.orderedProductList.find(element => {
-      if (element.id === Id) {
-        result = element.image;
-      }
-    });
-    return result;
-  }
-
-  getProductCategory(Id): string {
-    let result = '';
-    this.orderedProductList.find(element => {
-      if (element.id === Id) {
-        result = element.category;
-      }
-    });
-    return result;
-  }
-
-  getProductPrice(Id): number {
-    let result = null;
-    this.orderedProductList.find(element => {
-      if (element.id === Id) {
-        result = element.price;
-      }
-    });
-    return result;
+    return quantity;
   }
 
   increaseQuantity(Id) {
-    this.orderInput.products.find(element => {
+    this.currentCart.find(element => {
       if (element.productId === Id) {
-        document.getElementById('increaseQuantityButton' + Id).hidden = false;
+        document.getElementById('decreaseQuantityButton' + Id).hidden = false;
         element.quantity++;
       }
     });
+    this.updateCart(this.currentCart);
   }
 
   decreaseQuantity(Id) {
-    this.orderInput.products.find(element => {
+    this.currentCart.find(element => {
       if (element.productId === Id) {
-        if (element.quantity === 1) {
+        if (element.quantity === 2) {
           document.getElementById('decreaseQuantityButton' + Id).hidden = true;
-        } else {
-          element.quantity--;
         }
+        element.quantity--;
       }
+    });
+    this.updateCart(this.currentCart);
+  }
+
+  deleteProductFromCart(id) {
+    this.currentCart.find(element => {
+      if (element.productId === id) {
+        this.currentCart.splice(this.currentCart.indexOf(element), 1);
+        this.productsToDisplay.find(a => {
+          if (a.id === id) {
+            this.productsToDisplay.splice(this.productsToDisplay.indexOf(a), 1);
+          }
+        });
+      }
+    });
+    this.updateCart(this.currentCart);
+  }
+
+  updateCart(cart: Cart[]) {
+    this.userService.updateUserCart('doej', cart).subscribe(() => {
     });
   }
 }

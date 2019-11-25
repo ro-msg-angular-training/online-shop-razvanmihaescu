@@ -30,9 +30,8 @@ export class EditProductComponent implements OnInit {
     });
 
     this.editingProductId = this.route.snapshot.params.id;
-    this.editingProduct = this.productService.getProductById(this.editingProductId).subscribe(a => {
+    this.productService.getProductById(this.editingProductId).subscribe(a => {
         this.editingProduct = a;
-
         this.formGroup.setValue({
           id: this.editingProduct.id,
           name: this.editingProduct.name,
