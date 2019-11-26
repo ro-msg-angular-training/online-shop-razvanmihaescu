@@ -7,14 +7,26 @@ import {EditProductComponent} from './components/edit-product/edit-product.compo
 import {ShoppingCartComponent} from './components/shopping-cart/shopping-cart.component';
 import {AddProductComponent} from './components/add-product/add-product.component';
 import {LoginComponent} from './components/login/login.component';
+import {AuthGuard} from './auth/auth.guard';
+import {RoleGuard} from './guards/role-guard.service';
 
 
 const routes: Routes = [
-  {path: 'products', component: ProductsComponent},
-  {path: 'single/:id', component: SingleProductComponent},
-  {path: 'edit/:id', component: EditProductComponent},
-  {path: 'add', component: AddProductComponent},
-  {path: 'shoppingcart', component: ShoppingCartComponent},
+  {
+    path: 'products',
+    component: ProductsComponent,
+    canActivate: [AuthGuard]
+  },
+  {path: 'single/:id', component: SingleProductComponent, canActivate: [AuthGuard]},
+  {
+    path: 'edit/:id', component: EditProductComponent, canActivate: [AuthGuard, RoleGuard],
+    data: {allowedRoles: ['admin']}
+  },
+  {
+    path: 'add', component: AddProductComponent, canActivate: [AuthGuard, RoleGuard],
+    data: {allowedRoles: ['admin']}
+  },
+  {path: 'shoppingcart', component: ShoppingCartComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'}
 ];

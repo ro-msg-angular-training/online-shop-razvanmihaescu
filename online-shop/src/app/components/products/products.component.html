@@ -2,24 +2,25 @@
   <div class="row" style="margin-bottom: 1.5rem !important;">
     <div class="col-11"><h1 class="text-danger">Products</h1></div>
     <div class="col-1">
-      <button class="btn btn-light bg-danger" [routerLink]="['/add']">Add</button>
+      <button class="btn btn-light bg-danger" [hidden]="!addButtonState" [routerLink]="['/add']">Add</button>
     </div>
   </div>
 
-    <div class="row">
-      <div class="card-columns " style="column-count: 4">
-        <div class="card" style="height: 500px;" *ngFor="let product of products">
-          <div class="card-body text-center">
-            <img class="card-img-top" style="width: 75% " src="{{product.image}}" alt="Card image">
-            <div class="card-body">
-              <h4 class="card-title">{{product.category}}</h4>
-              <p class="card-text">{{product.name}}</p>
-              <p class="card-text">{{product.price}} LEI</p>
-              <p class="card-text">{{product.description}}</p>
-              <a class="btn btn-primary navbar_btn bg-danger stretched-link" [routerLink]="['/single', product.id]">Details</a>
-            </div>
+  <div class="row">
+    <div class="card-columns " style="column-count: 4">
+      <div class="card" style="height: 500px;" *ngFor="let product of products">
+        <div class="card-body text-center">
+          <img class="card-img-top" style="width: 75% " src="{{product.image}}" alt="Card image">
+          <div class="card-body">
+            <h4 class="card-title">{{product.category}}</h4>
+            <p class="card-text">{{product.name}}</p>
+            <p class="card-text">{{product.price}} LEI</p>
+            <p class="card-text">{{product.description}}</p>
+            <a class="btn btn-light navbar_btn bg-danger stretched-link"
+               [routerLink]="['/single', product.id]">Details</a>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

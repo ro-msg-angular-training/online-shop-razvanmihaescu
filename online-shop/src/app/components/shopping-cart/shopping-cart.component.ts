@@ -18,13 +18,15 @@ export class ShoppingCartComponent implements OnInit {
   };
   currentCart: Cart[] = [];
   productsToDisplay: Product[] = [];
+  currentUser: string;
 
   constructor(private shoppingCartService: ShoppingCartService, private navigationService: NavigationService,
               private productService: ProductService, private userService: UserService) {
   }
 
   ngOnInit() {
-    this.userService.getCurrentUserInfos('doej').subscribe(data => {
+    this.currentUser = localStorage.getItem('username');
+    this.userService.getCurrentUserInfos(this.currentUser).subscribe(data => {
       this.currentCart = data.cart;
       this.currentCart.forEach(a => {
         this.getProduct(a.productId).subscribe(resp => this.productsToDisplay.push(resp));
@@ -34,7 +36,7 @@ export class ShoppingCartComponent implements OnInit {
 
   onClickCheckout() {
     this.orderInput.products = this.currentCart;
-    this.orderInput.customer = 'doej';
+    this.orderInput.customer = this.currentUser;
     this.shoppingCartService.addOrder(this.orderInput).subscribe(() => {
     });
     this.navigationService.goingToProductList();
@@ -88,21 +90,21 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   deleteProductFromCart(id) {
+    this.productsToDisplay.find(a => {
+      if (a !== undefined && a.id === id) {
+        this.productsToDisplay.splice(this.productsToDisplay.indexOf(a), 1);
+      }
+    });
     this.currentCart.find(element => {
-      if (element.productId === id) {
+      if (element !== undefined && element.productId === id) {
         this.currentCart.splice(this.currentCart.indexOf(element), 1);
-        this.productsToDisplay.find(a => {
-          if (a.id === id) {
-            this.productsToDisplay.splice(this.productsToDisplay.indexOf(a), 1);
-          }
-        });
       }
     });
     this.updateCart(this.currentCart);
   }
 
   updateCart(cart: Cart[]) {
-    this.userService.updateUserCart('doej', cart).subscribe(() => {
+    this.userService.updateUserCart(this.currentUser, cart).subscribe(() => {
     });
   }
 }

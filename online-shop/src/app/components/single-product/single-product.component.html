@@ -18,8 +18,10 @@
   <div><span>Price: </span>{{detailedProduct.price}} LEI</div>
   <div class="row">
     <div class="col-6 mt-5">
-      <button class="btn btn-light bg-danger" (click)="onClickDelete()">Delete</button>
-      <button class="btn btn-light bg-danger" [routerLink]="['/edit', detailedProduct.id]">Edit</button>
+      <button class="btn btn-light bg-danger" [hidden]="!deleteButtonState" (click)="onClickDelete()">Delete</button>
+      <button class="btn btn-light bg-danger" [hidden]="!editButtonState" [routerLink]="['/edit', detailedProduct.id]">
+        Edit
+      </button>
     </div>
     <div class="col-3"><img src="{{detailedProduct.image}}"
                             style="box-shadow: 0 4px 8px 0 rgba(2, 116, 7, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">

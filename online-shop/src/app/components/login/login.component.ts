@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(this.credentials).subscribe(response => {
       this.currentUser = response;
+      localStorage.setItem('roles', response.roles.toString());
       this.authService.isLoggedIn = true;
       this.navigationService.goingToProductList();
     });

@@ -16,6 +16,7 @@ export class AuthService {
   }
 
   login(credentials: Credentials): Observable<User> {
+    localStorage.setItem('username', credentials.username);
     return this.httpClient.post<any>('http://localhost:3000/login', credentials).pipe(catchError(this.handleError));
   }
 
@@ -39,5 +40,13 @@ export class AuthService {
 
   logout(): void {
     this.isLoggedIn = false;
+  }
+
+  isAuthenticated() {
+    return this.isLoggedIn;
+  }
+
+  getRoles(): string {
+    return localStorage.getItem('roles').toString();
   }
 }

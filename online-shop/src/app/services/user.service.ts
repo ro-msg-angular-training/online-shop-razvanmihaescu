@@ -16,7 +16,6 @@ export class UserService {
   }
 
   updateUserCart(username, cart: Cart[]) {
-    // In tutoriale era asa: {"cart": cart}, dar nu mergea
     return this.httpClient.patch('http://localhost:3000/users/' + username, {cart: cart});
   }
 }

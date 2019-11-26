@@ -16,12 +16,22 @@ import {Cart} from '../../models/OrderInput';
 export class SingleProductComponent implements OnInit {
   @Input()
   detailedProduct: Product;
+  deleteButtonState: boolean;
+  editButtonState: boolean;
 
   constructor(private route: ActivatedRoute, private productService: ProductService, private shoppingCartService: ShoppingCartService, private navigationService: NavigationService, private userService: UserService) {
   }
 
   ngOnInit() {
     this.productService.getProductById(this.route.snapshot.params.id).subscribe(a => this.detailedProduct = a);
+
+    if (localStorage.getItem('roles').toString().includes('admin')) {
+      this.editButtonState = true;
+      this.deleteButtonState = true;
+    } else {
+      this.editButtonState = false;
+      this.deleteButtonState = false;
+    }
   }
 
   onClickDelete() {
