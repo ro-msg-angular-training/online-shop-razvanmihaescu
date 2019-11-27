@@ -5,6 +5,7 @@ import {Credentials} from 'src/app/models/Credentials';
 import {Router} from '@angular/router';
 import {User} from '../../models/User';
 import {NavigationService} from '../../services/navigation.service';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   credentials: Credentials;
   currentUser: User;
 
-  constructor(private authService: AuthService, private router: Router, private navigationService: NavigationService) {
+  constructor(private authService: AuthService, private userService: UserService, private router: Router, private navigationService: NavigationService) {
   }
 
   ngOnInit() {
@@ -37,6 +38,9 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.credentials).subscribe(response => {
       this.currentUser = response;
       localStorage.setItem('roles', response.roles.toString());
+      this.userService.getCurrentUserInfos(localStorage.getItem('username')).subscribe(a => {
+        this.userService.updateCurrentNumberOfProducts();
+      });
       this.authService.isLoggedIn = true;
       this.navigationService.goingToProductList();
     });

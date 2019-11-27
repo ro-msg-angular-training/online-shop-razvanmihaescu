@@ -41,7 +41,9 @@
                     </div>
                   <td class="align-middle"><strong>{{product.price * getProductQuantity(product.id)}}
                     LEI</strong></td>
-                  <td class="align-middle cartItemsAlign"><a class="text-dark" id="decreaseQuantityButton{{product.id}}"
+                  <td class="align-middle cartItemsAlign"><a class="text-dark"
+                                                             [hidden]="(!decreaseButtonState(product.id))"
+                                                             id="decreaseQuantityButton{{product.id}}"
                                                              (click)="decreaseQuantity(product.id)"><i
                     class="fas fa-minus"></i></a><strong>
                     {{getProductQuantity(product.id)}}</strong><a class="text-dark"

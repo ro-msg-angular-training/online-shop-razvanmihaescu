@@ -2,11 +2,15 @@
   <a class="navbar-brand text-danger">{{title}}</a>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active text-danger" [routerLink]="['/products']">Product List <span
-        class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link active text-danger" [hidden]="!authService.isLoggedIn" [routerLink]="['/products']">Product
+        List <span
+          class="sr-only">(current)</span></a>
     </div>
   </div>
-  <a class="btn btn-light my-2 my-sm-0 bg-danger navbar_btn" [routerLink]="['/shoppingcart']">Shopping Cart</a>
+  <a class="btn btn-light my-2 my-sm-2 bg-danger navbar_btn" [hidden]="!authService.isLoggedIn"
+     matBadge="{{getNumberOfProductsInCart()}}" [matBadgeHidden]="badgeMustBeHidden" matBadgeSize="medium"
+     matBadgePosition="before"
+     matBadgeColor="accent" [routerLink]="['/shoppingcart']">Shopping Cart</a>
 </nav>
 <div style="margin-top: 100px">
   <router-outlet></router-outlet>

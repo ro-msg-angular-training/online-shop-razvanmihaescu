@@ -20,6 +20,7 @@ export class ShoppingCartComponent implements OnInit {
   productsToDisplay: Product[] = [];
   currentUser: string;
 
+
   constructor(private shoppingCartService: ShoppingCartService, private navigationService: NavigationService,
               private productService: ProductService, private userService: UserService) {
   }
@@ -29,7 +30,9 @@ export class ShoppingCartComponent implements OnInit {
     this.userService.getCurrentUserInfos(this.currentUser).subscribe(data => {
       this.currentCart = data.cart;
       this.currentCart.forEach(a => {
-        this.getProduct(a.productId).subscribe(resp => this.productsToDisplay.push(resp));
+        this.getProduct(a.productId).subscribe(resp => {
+          this.productsToDisplay.push(resp);
+        });
       });
     });
   }
@@ -70,7 +73,7 @@ export class ShoppingCartComponent implements OnInit {
   increaseQuantity(Id) {
     this.currentCart.find(element => {
       if (element.productId === Id) {
-        document.getElementById('decreaseQuantityButton' + Id).hidden = false;
+        // document.getElementById('decreaseQuantityButton' + Id).hidden = false;
         element.quantity++;
       }
     });
@@ -80,9 +83,9 @@ export class ShoppingCartComponent implements OnInit {
   decreaseQuantity(Id) {
     this.currentCart.find(element => {
       if (element.productId === Id) {
-        if (element.quantity === 2) {
-          document.getElementById('decreaseQuantityButton' + Id).hidden = true;
-        }
+        // if (element.quantity === 2) {
+        //   document.getElementById('decreaseQuantityButton' + Id).hidden = true;
+        // }
         element.quantity--;
       }
     });
@@ -105,6 +108,11 @@ export class ShoppingCartComponent implements OnInit {
 
   updateCart(cart: Cart[]) {
     this.userService.updateUserCart(this.currentUser, cart).subscribe(() => {
+      this.userService.updateCurrentNumberOfProducts();
     });
+  }
+
+  decreaseButtonState(id: number) {
+    return this.getProductQuantity(id) !== 1;
   }
 }

@@ -12,14 +12,14 @@
 
 
   </div>
-  <div><span>ID: </span>{{detailedProduct.id}}</div>
+  <div [hidden]="!adminButtonState"><span>ID: </span>{{detailedProduct.id}}</div>
   <div><span>Category: </span>{{detailedProduct.category}}</div>
   <div><span>Name: </span>{{detailedProduct.category}}</div>
   <div><span>Price: </span>{{detailedProduct.price}} LEI</div>
   <div class="row">
     <div class="col-6 mt-5">
-      <button class="btn btn-light bg-danger" [hidden]="!deleteButtonState" (click)="onClickDelete()">Delete</button>
-      <button class="btn btn-light bg-danger" [hidden]="!editButtonState" [routerLink]="['/edit', detailedProduct.id]">
+      <button class="btn btn-light bg-danger" [hidden]="!adminButtonState" (click)="onClickDelete()">Delete</button>
+      <button class="btn btn-light bg-danger" [hidden]="!adminButtonState" [routerLink]="['/edit', detailedProduct.id]">
         Edit
       </button>
     </div>
