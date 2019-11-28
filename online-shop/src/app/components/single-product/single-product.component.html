@@ -1,5 +1,4 @@
 <div class="container" *ngIf="detailedProduct">
-
   <div class="row">
     <div class="col-9">
       <h2>{{detailedProduct.name}}</h2>
@@ -9,22 +8,21 @@
     <div class="col-2">
       <button class="btn btn-lg btn-light bg-danger" (click)="onClickBuy()">Buy</button>
     </div>
-
-
   </div>
-  <div [hidden]="!adminButtonState"><span>ID: </span>{{detailedProduct.id}}</div>
+
+  <div [hidden]="!adminButtonsState"><span>ID: </span>{{detailedProduct.id}}</div>
+  <div><span>Name: </span>{{detailedProduct.name}}</div>
   <div><span>Category: </span>{{detailedProduct.category}}</div>
-  <div><span>Name: </span>{{detailedProduct.category}}</div>
   <div><span>Price: </span>{{detailedProduct.price}} LEI</div>
+  <div><span>Description: </span>{{detailedProduct.description}} LEI</div>
   <div class="row">
     <div class="col-6 mt-5">
-      <button class="btn btn-light bg-danger" [hidden]="!adminButtonState" (click)="onClickDelete()">Delete</button>
-      <button class="btn btn-light bg-danger" [hidden]="!adminButtonState" [routerLink]="['/edit', detailedProduct.id]">
+      <button class="btn btn-light bg-danger" [hidden]="!adminButtonsState" (click)="onClickDelete()">Delete</button>
+      <button class="btn btn-light bg-danger" [hidden]="!adminButtonsState"
+              [routerLink]="['/edit', detailedProduct.id]">
         Edit
       </button>
     </div>
-    <div class="col-3"><img src="{{detailedProduct.image}}"
-                            style="box-shadow: 0 4px 8px 0 rgba(2, 116, 7, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-    </div>
+    <img src="{{detailedProduct.image}}" class="rounded float-right" style="box-shadow: 0 4px 8px 0 rgba(2, 116, 7, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
   </div>
 </div>

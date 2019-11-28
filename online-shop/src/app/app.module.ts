@@ -15,7 +15,7 @@ import {LoginComponent} from './components/login/login.component';
 import {AuthGuard} from './auth/auth.guard';
 import {RoleGuard} from './guards/role-guard.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatBadgeModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+import {MatBadgeModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatTabsModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,9 @@ import {MatBadgeModule, MatFormFieldModule, MatInputModule} from '@angular/mater
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatTabsModule,
+    MatButtonModule,
   ],
   providers: [AuthGuard, RoleGuard],
   bootstrap: [AppComponent]

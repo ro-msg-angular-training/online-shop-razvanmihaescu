@@ -10,7 +10,7 @@ import {NavigationService} from './navigation.service';
 })
 export class ShoppingCartService {
 
-  constructor(private httpClient: HttpClient, private navigationService: NavigationService) {
+  constructor(private httpClient: HttpClient) {
   }
 
   addOrder(order: OrderInput) {

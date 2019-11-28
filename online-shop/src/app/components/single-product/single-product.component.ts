@@ -15,8 +15,8 @@ import {Cart} from '../../models/OrderInput';
 })
 export class SingleProductComponent implements OnInit {
   @Input()
-  detailedProduct: Product;
-  adminButtonState: boolean;
+  detailedProduct: Product = {id: null, description: null, name: null, price: null, category: null, image: null};
+  adminButtonsState: boolean;
 
   constructor(private route: ActivatedRoute, private productService: ProductService, private shoppingCartService: ShoppingCartService, private navigationService: NavigationService, private userService: UserService) {
   }
@@ -25,9 +25,9 @@ export class SingleProductComponent implements OnInit {
     this.productService.getProductById(this.route.snapshot.params.id).subscribe(a => this.detailedProduct = a);
 
     if (localStorage.getItem('roles').toString().includes('admin')) {
-      this.adminButtonState = true;
+      this.adminButtonsState = true;
     } else {
-      this.adminButtonState = false;
+      this.adminButtonsState = false;
     }
   }
 
@@ -41,7 +41,7 @@ export class SingleProductComponent implements OnInit {
   onClickBuy() {
     let user: User = {fullName: '', username: '', roles: [], cart: []};
     let product: Cart = {productId: this.detailedProduct.id, quantity: 1};
-    this.userService.getCurrentUserInfos('doej').subscribe(data => {
+    this.userService.getCurrentUserInfos(localStorage.getItem('username')).subscribe(data => {
       user = data;
       if (user.cart.length === 0) {
         user.cart.push(product);
@@ -59,7 +59,7 @@ export class SingleProductComponent implements OnInit {
           user.cart[index].quantity++;
         }
       }
-      this.userService.updateUserCart('doej', user.cart).subscribe(() => {
+      this.userService.updateUserCart(localStorage.getItem('username'), user.cart).subscribe(() => {
         this.navigationService.goingToProductList();
         this.userService.updateCurrentNumberOfProducts();
       });

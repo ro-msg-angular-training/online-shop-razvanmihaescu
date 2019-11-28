@@ -19,7 +19,7 @@ export class UserService {
     this.httpClient.get<User>('http://localhost:3000/users/' + localStorage.getItem('username')).subscribe(a => {
       let value = 0;
       a.cart.forEach(b => value += b.quantity);
-      localStorage.setItem('productsInCart', value.toString());
+      localStorage.setItem('numberOfProductsInCart', value.toString());
     });
   }
 

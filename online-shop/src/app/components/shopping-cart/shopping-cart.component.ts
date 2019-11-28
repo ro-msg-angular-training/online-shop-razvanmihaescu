@@ -73,7 +73,6 @@ export class ShoppingCartComponent implements OnInit {
   increaseQuantity(Id) {
     this.currentCart.find(element => {
       if (element.productId === Id) {
-        // document.getElementById('decreaseQuantityButton' + Id).hidden = false;
         element.quantity++;
       }
     });
@@ -83,9 +82,6 @@ export class ShoppingCartComponent implements OnInit {
   decreaseQuantity(Id) {
     this.currentCart.find(element => {
       if (element.productId === Id) {
-        // if (element.quantity === 2) {
-        //   document.getElementById('decreaseQuantityButton' + Id).hidden = true;
-        // }
         element.quantity--;
       }
     });

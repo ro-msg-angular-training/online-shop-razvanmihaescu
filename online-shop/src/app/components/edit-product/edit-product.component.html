@@ -48,7 +48,7 @@
     <div class="form-group row">
       <div class="col 4"></div>
       <div class="col-sm-2">
-        <input type="button" (click)="productService.goingHome()" class="btn btn-light bg-danger" value="Cancel">
+        <input type="button" (click)="this.navigationService.goingBack()" class="btn btn-light bg-danger" value="Cancel">
         <input type="submit" class="btn btn-light bg-danger" value="Save" [disabled]="!formGroup.valid">
       </div>
       <div class="col 4"></div>

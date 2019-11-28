@@ -1,14 +1,52 @@
-<div class="container-fluid w-75" *ngIf="products">
-  <div class="row" style="margin-bottom: 1.5rem !important;">
-    <div class="col-11"><h1 class="text-danger">Products</h1></div>
-    <div class="col-1">
+<div class="container-fluid">
+  <div class="row mb-2">
+    <div class="col-4">
       <button class="btn btn-light bg-danger" [hidden]="!addButtonState" [routerLink]="['/add']">Add</button>
+    </div>
+    <div class="col-4"> <span class="h1 text-danger">Have a nice day, {{currentUsername}} !</span></div>
+    <div class="col-2"></div>
+    <div class="col-2">
+        <input class="form-control float-right" type="text" placeholder="Search" aria-label="Search">
     </div>
   </div>
 
+  <!--Navbar-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mdb-color lighten-3 mb-5">
+
+    <!-- Navbar brand -->
+
+    <!-- Collapse button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+            aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="basicExampleNav">
+
+<!--       Links-->
+      <div class="col-1"></div>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"  *ngFor="let category of uniqueCategories">
+          <a class="btn navbar_btn" [ngClass]="{'nav-link': true, selectedCategory: category === currentSelectedCategory, notSelectedCategory: category !== currentSelectedCategory}" (click)="filterProductsByCategory(category)">{{category}}</a>
+        </li>
+      </ul>
+      <div class="col-1"></div>
+      <!-- Links -->
+
+    </div>
+    <!-- Collapsible content -->
+
+  </nav>
+  <!--/.Navbar-->
+
+
+  </div>
+
+    <div class="container-fluid w-75" *ngIf="products">
   <div class="row">
-    <div class="card-columns " style="column-count: 4">
-      <div class="card" style="height: 500px;" *ngFor="let product of products">
+    <div class="card-columns ml-2 mr-2" style="column-count: 6">
+      <div class="card" style="height: 500px;" *ngFor="let product of filteredProducts">
         <div class="card-body text-center">
           <img class="card-img-top" style="width: 75% " src="{{product.image}}" alt="Card image">
           <div class="card-body">
