@@ -24,7 +24,6 @@ export class AppComponent implements OnInit {
 
   getNumberOfProductsInCart() {
     let value = localStorage.getItem('numberOfProductsInCart');
-    console.log(value);
     if (value === '0') {
       this.badgeMustBeHidden = true;
       return null;

@@ -16,6 +16,12 @@ import {AuthGuard} from './auth/auth.guard';
 import {RoleGuard} from './guards/role-guard.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatBadgeModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatTabsModule} from '@angular/material';
+import {EffectsModule} from '@ngrx/effects';
+import {ProductEffects} from './store/effects/product.effect';
+import {StoreModule} from '@ngrx/store';
+import {appReducers} from './store/reducers/app.reducer';
+import {StoreDevtoolsModule} from "@ngrx/store-devtools";
+import {environment} from "../environments/environment";
 
 @NgModule({
   declarations: [
@@ -32,6 +38,9 @@ import {MatBadgeModule, MatButtonModule, MatFormFieldModule, MatInputModule, Mat
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    StoreModule.forRoot(appReducers),
+    EffectsModule.forRoot([ProductEffects]),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
     MatSliderModule,
     ReactiveFormsModule,
     AppRoutingModule,
