@@ -16,8 +16,10 @@ export class ProductsComponent implements OnInit {
   addButtonState: boolean;
   currentUsername;
   filteredProducts: Product[];
+  searchedProducts: Product[];
   uniqueCategories: string[] = [];
   currentSelectedCategory = 'All';
+  searchFieldValue: string;
 
   products$ = this.store.pipe(select(selectProductList));
 
@@ -46,6 +48,16 @@ export class ProductsComponent implements OnInit {
       this.filteredProducts = this.products;
     } else {
       this.filteredProducts = this.products.filter(a => a.category === category);
+    }
+  }
+
+  functie() {
+    this.filterProductsByCategory(this.currentSelectedCategory);
+    if (this.searchFieldValue !== '') {
+      this.filteredProducts = this.filteredProducts.filter(a => a.name.toLowerCase().includes(this.searchFieldValue.toLowerCase())
+      );
+    } else {
+      this.filterProductsByCategory(this.currentSelectedCategory);
     }
   }
 }
