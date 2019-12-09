@@ -20,6 +20,8 @@ export class GetAllProductsSuccess implements Action {
 
 export class GetProduct implements Action {
   public readonly type = EProductActions.GetProduct;
+  constructor(public id: number) {
+  }
 }
 
 export class GetProductSuccess implements Action {

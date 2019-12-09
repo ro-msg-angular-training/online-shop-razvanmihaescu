@@ -1,5 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Product} from '../../models/Product';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ProductService} from '../../services/product.service';
 import {ShoppingCartService} from '../../services/shopping-cart.service';
@@ -7,6 +6,11 @@ import {NavigationService} from '../../services/navigation.service';
 import {UserService} from '../../services/user.service';
 import {User} from '../../models/User';
 import {Cart} from '../../models/OrderInput';
+import {select, Store} from '@ngrx/store';
+import {selectSelectedProduct} from '../../store/selectors/user.selector';
+import {IAppState} from '../../store/states/app.state';
+import {GetProduct} from '../../store/actions/product.action';
+import {Product} from '../../models/Product';
 
 @Component({
   selector: 'app-single-product',
@@ -14,21 +18,23 @@ import {Cart} from '../../models/OrderInput';
   styleUrls: ['./single-product.component.css']
 })
 export class SingleProductComponent implements OnInit {
-  @Input()
   detailedProduct: Product = {id: null, description: null, name: null, price: null, category: null, image: null};
   adminButtonsState: boolean;
+  product$ = this.store.pipe(select(selectSelectedProduct));
 
-  constructor(private route: ActivatedRoute, private productService: ProductService, private shoppingCartService: ShoppingCartService, private navigationService: NavigationService, private userService: UserService) {
+  constructor(private route: ActivatedRoute,
+              private productService: ProductService,
+              private shoppingCartService: ShoppingCartService,
+              private navigationService: NavigationService,
+              private userService: UserService,
+              private store: Store<IAppState>) {
   }
 
   ngOnInit() {
-    this.productService.getProductById(this.route.snapshot.params.id).subscribe(a => this.detailedProduct = a);
-
-    if (localStorage.getItem('roles').toString().includes('admin')) {
-      this.adminButtonsState = true;
-    } else {
-      this.adminButtonsState = false;
-    }
+    // this.productService.getProductById(this.route.snapshot.params.id).subscribe(a => this.detailedProduct = a);
+    this.store.dispatch(new GetProduct(this.route.snapshot.params.id));
+    this.product$.subscribe(a => this.detailedProduct = a);
+    this.adminButtonsState = localStorage.getItem('roles').toString().includes('admin');
   }
 
   onClickDelete() {
@@ -40,7 +46,7 @@ export class SingleProductComponent implements OnInit {
 
   onClickBuy() {
     let user: User = {fullName: '', username: '', roles: [], cart: []};
-    let product: Cart = {productId: this.detailedProduct.id, quantity: 1};
+    const product: Cart = {productId: this.detailedProduct.id, quantity: 1};
     this.userService.getCurrentUserInfos(localStorage.getItem('username')).subscribe(data => {
       user = data;
       if (user.cart.length === 0) {

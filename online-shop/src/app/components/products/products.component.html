@@ -48,7 +48,7 @@
 <div class="container-fluid w-75" *ngIf="products$">
   <div class="row">
     <div class="card-columns ml-2 mr-2" style="column-count: 6">
-      <div class="card" style="height: 500px;" *ngFor="let product of (products$ | async)">
+      <div class="card" style="height: 500px;" *ngFor="let product of filteredProducts">
         <div class="card-body text-center">
           <img class="card-img-top" style="width: 75% " src="{{product.image}}" alt="Card image">
           <div class="card-body">

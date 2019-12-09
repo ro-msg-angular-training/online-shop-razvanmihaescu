@@ -7,7 +7,6 @@ export const productReducers = (
 ): IProductState => {
   switch (action.type) {
     case EProductActions.GetAllProductsSuccess: {
-      console.log("asdsadsa");
       return {
         ...state,
         products: action.payload

@@ -26,17 +26,17 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() {
     this.currentUsername = localStorage.getItem('username');
-    // this.productService.getProducts().subscribe(data => {
-    //   this.products = data;
-    //   this.filteredProducts = data;
-    //   let allCategories: string[] = [];
-    //   data.forEach(a => allCategories.push(a.category));
-    //   this.uniqueCategories = Array.from(new Set(allCategories));
-    //   this.uniqueCategories.unshift('All');
-    // });
+
     // adding NGRX
     this.store.dispatch(new GetAllProducts());
-    console.log(this.products);
+    this.products$.subscribe(data => {
+      this.products = data;
+      this.filteredProducts = data;
+      let allCategories: string[] = [];
+      data.forEach(a => allCategories.push(a.category));
+      this.uniqueCategories = Array.from(new Set(allCategories));
+      this.uniqueCategories.unshift('All');
+    });
     this.addButtonState = localStorage.getItem('roles').toString().includes('admin');
   }
 
