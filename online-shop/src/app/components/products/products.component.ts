@@ -16,7 +16,6 @@ export class ProductsComponent implements OnInit {
   addButtonState: boolean;
   currentUsername;
   filteredProducts: Product[];
-  searchedProducts: Product[];
   uniqueCategories: string[] = [];
   currentSelectedCategory = 'All';
   searchFieldValue: string;
@@ -51,7 +50,7 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  functie() {
+  searchByName() {
     this.filterProductsByCategory(this.currentSelectedCategory);
     if (this.searchFieldValue !== '') {
       this.filteredProducts = this.filteredProducts.filter(a => a.name.toLowerCase().includes(this.searchFieldValue.toLowerCase())

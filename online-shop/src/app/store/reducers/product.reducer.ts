@@ -12,12 +12,20 @@ export const productReducers = (
         products: action.payload
       };
     }
+
     case EProductActions.GetProductSuccess: {
       return {
         ...state,
         selectedProduct: action.payload
       };
     }
+
+    case EProductActions.DeleteProduct: {
+      return {
+        ...state,
+      };
+    }
+
     default:
       return state;
   }

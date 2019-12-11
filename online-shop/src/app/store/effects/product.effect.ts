@@ -1,5 +1,5 @@
 import {Actions, createEffect, Effect, ofType} from '@ngrx/effects';
-import {EProductActions, GetProduct} from '../actions/product.action';
+import {DeleteProduct, EProductActions, GetProduct} from '../actions/product.action';
 import {ProductService} from '../../services/product.service';
 import {map, mergeMap, switchMap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
@@ -23,6 +23,16 @@ export class ProductEffects {
     switchMap((action) => this.productService.getProductById(action.id)
       .pipe(
         map(product => ({type: EProductActions.GetProductSuccess, payload: product}),
+        ))
+    ))
+  );
+
+  @Effect()
+  deleteProduct = createEffect(() => this.actions$.pipe(
+    ofType<DeleteProduct>(EProductActions.DeleteProduct),
+    switchMap((action) => this.productService.deleteProduct(action.id)
+      .pipe(
+        map(product => ({type: EProductActions.DeleteProduct}),
         ))
     ))
   );

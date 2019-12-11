@@ -9,7 +9,7 @@ import {Cart} from '../../models/OrderInput';
 import {select, Store} from '@ngrx/store';
 import {selectSelectedProduct} from '../../store/selectors/user.selector';
 import {IAppState} from '../../store/states/app.state';
-import {GetProduct} from '../../store/actions/product.action';
+import {DeleteProduct, GetProduct} from '../../store/actions/product.action';
 import {Product} from '../../models/Product';
 
 @Component({
@@ -38,10 +38,14 @@ export class SingleProductComponent implements OnInit {
   }
 
   onClickDelete() {
-    this.productService
-      .deleteProduct(this.detailedProduct.id)
-      .subscribe(() =>
-        this.navigationService.goingToProductList());
+    // this.productService
+    //   .deleteProduct(this.detailedProduct.id)
+    //   .subscribe(() =>
+    //     this.navigationService.goingToProductList());
+
+    //ngrx
+    this.store.dispatch(new DeleteProduct(this.detailedProduct.id));
+    this.navigationService.goingToProductList();
   }
 
   onClickBuy() {

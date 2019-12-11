@@ -6,7 +6,7 @@
     <div class="col-4"><span class="h1 text-danger">Have a nice day, {{currentUsername}} !</span></div>
     <div class="col-2"></div>
     <div class="col-2">
-      <input class="form-control float-right" [(ngModel)]="searchFieldValue" (ngModelChange)="functie()" type="text" placeholder="Search" aria-label="Search">
+      <input class="form-control float-right" [(ngModel)]="searchFieldValue" (ngModelChange)="searchByName()" type="text" placeholder="Search" aria-label="Search">
     </div>
   </div>
 
@@ -48,9 +48,9 @@
 <div class="container-fluid w-75" *ngIf="products$">
   <div class="row">
     <div class="card-columns ml-2 mr-2" style="column-count: 6">
-      <div class="card" style="height: 500px;"*ngFor="let product of filteredProducts">
+      <div class="card" style="height: 400px;"*ngFor="let product of filteredProducts">
         <div class="card-body text-center">
-          <img class="card-img-top" style="width: 75% " src="{{product.image}}" alt="Card image">
+          <img class="card-img-top" style="width: 75%; max-height: 100px" src="{{product.image}}" alt="Card image">
           <div class="card-body">
             <h4 class="card-title">{{product.category}}</h4>
             <p class="card-text">{{product.name}}</p>
