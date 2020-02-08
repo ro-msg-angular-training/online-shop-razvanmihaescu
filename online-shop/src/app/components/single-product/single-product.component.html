@@ -14,7 +14,7 @@
   <div><span>Name: </span>{{detailedProduct.name}}</div>
   <div><span>Category: </span>{{detailedProduct.category}}</div>
   <div><span>Price: </span>{{detailedProduct.price}} LEI</div>
-  <div><span>Description: </span>{{detailedProduct.description}} LEI</div>
+  <div><span>Description: </span>{{detailedProduct.description}}</div>
   <div class="row">
     <div class="col-6 mt-5">
       <button class="btn btn-light bg-danger" [hidden]="!adminButtonsState" (click)="onClickDelete()">Delete</button>
@@ -23,6 +23,6 @@
         Edit
       </button>
     </div>
-    <img src="{{detailedProduct.image}}" class="rounded float-right" style="box-shadow: 0 4px 8px 0 rgba(2, 116, 7, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+    <img src="{{detailedProduct.imageUrl}}" class="rounded float-right" style="box-shadow: 0 4px 8px 0 rgba(2, 116, 7, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
   </div>
 </div>

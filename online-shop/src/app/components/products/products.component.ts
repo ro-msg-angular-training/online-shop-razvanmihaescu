@@ -38,7 +38,7 @@ export class ProductsComponent implements OnInit {
       this.uniqueCategories = Array.from(new Set(allCategories));
       this.uniqueCategories.unshift('All');
     });
-    this.addButtonState = localStorage.getItem('roles').toString().includes('admin');
+    this.addButtonState = localStorage.getItem('roles').toString().toLowerCase().includes('admin');
   }
 
   filterProductsByCategory(category: string) {

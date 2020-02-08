@@ -2,26 +2,26 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Credentials} from '../models/Credentials';
 import {Observable, throwError} from 'rxjs';
-import {User} from '../models/User';
+import {JWToken} from '../models/JWToken';
 import {catchError} from 'rxjs/operators';
-import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   isLoggedIn = false;
+  API_URL = 'http://localhost:8080/Login';
 
-  constructor(private httpClient: HttpClient, private router: Router) {
+  constructor(private httpClient: HttpClient) {
   }
 
-  login(credentials: Credentials): Observable<User> {
+  login(credentials: Credentials): Observable<JWToken> {
     localStorage.setItem('username', credentials.username);
-    return this.httpClient.post<any>('http://localhost:3000/login', credentials).pipe(catchError(this.handleError));
+    return this.httpClient.post<any>(this.API_URL, credentials).pipe(catchError(this.handleError));
   }
 
   handleError(error: HttpErrorResponse) {
-    let errorMessage = 'Unknown error!';
+    let errorMessage: string;
     if (error.error instanceof ErrorEvent) {
       // Client-side errors
       errorMessage = `Error: ${error.error.message}`;

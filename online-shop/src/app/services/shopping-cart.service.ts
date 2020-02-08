@@ -10,11 +10,13 @@ import {NavigationService} from './navigation.service';
 })
 export class ShoppingCartService {
 
+  ENDPOINT = 'http://localhost:8080/Orders/';
+
   constructor(private httpClient: HttpClient) {
   }
 
   addOrder(order: OrderInput) {
-    return this.httpClient.post<any>('http://localhost:3000/orders', order).pipe(catchError(this.handleError.bind(this)));
+    return this.httpClient.post<any>(this.ENDPOINT, order).pipe(catchError(this.handleError.bind(this)));
   }
 
   handleError(error: HttpErrorResponse) {

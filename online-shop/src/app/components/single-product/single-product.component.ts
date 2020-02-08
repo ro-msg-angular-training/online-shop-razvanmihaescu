@@ -18,7 +18,7 @@ import {Product} from '../../models/Product';
   styleUrls: ['./single-product.component.css']
 })
 export class SingleProductComponent implements OnInit {
-  detailedProduct: Product = {id: null, description: null, name: null, price: null, category: null, image: null};
+  detailedProduct: Product = {id: null, description: null, name: null, price: null, category: null, imageUrl: null};
   adminButtonsState: boolean;
   product$ = this.store.pipe(select(selectSelectedProduct));
 
@@ -34,7 +34,7 @@ export class SingleProductComponent implements OnInit {
     // this.productService.getProductById(this.route.snapshot.params.id).subscribe(a => this.detailedProduct = a);
     this.store.dispatch(new GetProduct(this.route.snapshot.params.id));
     this.product$.subscribe(a => this.detailedProduct = a);
-    this.adminButtonsState = localStorage.getItem('roles').toString().includes('admin');
+    this.adminButtonsState = localStorage.getItem('roles').toString().toLowerCase().includes('admin');
   }
 
   onClickDelete() {

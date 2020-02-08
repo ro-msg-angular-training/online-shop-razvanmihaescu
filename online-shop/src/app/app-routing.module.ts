@@ -14,8 +14,7 @@ import {RoleGuard} from './guards/role-guard.service';
 const routes: Routes = [
   {
     path: 'products',
-    component: ProductsComponent,
-    canActivate: [AuthGuard]
+    component: ProductsComponent, canActivate: [AuthGuard]
   },
   {path: 'single/:id', component: SingleProductComponent, canActivate: [AuthGuard]},
   {

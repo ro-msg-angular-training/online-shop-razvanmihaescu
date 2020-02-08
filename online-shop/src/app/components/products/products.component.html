@@ -50,12 +50,11 @@
     <div class="card-columns ml-2 mr-2" style="column-count: 6">
       <div class="card" style="height: 400px;"*ngFor="let product of filteredProducts">
         <div class="card-body text-center">
-          <img class="card-img-top" style="width: 75%; max-height: 100px" src="{{product.image}}" alt="Card image">
+          <img class="card-img-top" style="width: 75%; max-height: 100px" src="{{product.imageUrl}}" alt="Card image">
           <div class="card-body">
             <h4 class="card-title">{{product.category}}</h4>
             <p class="card-text">{{product.name}}</p>
             <p class="card-text">{{product.price}} LEI</p>
-            <p class="card-text">{{product.description}}</p>
             <a class="btn btn-light navbar_btn bg-danger stretched-link"
                [routerLink]="['/single', product.id]">Details</a>
           </div>

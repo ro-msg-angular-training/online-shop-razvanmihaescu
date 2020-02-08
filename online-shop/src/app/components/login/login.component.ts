@@ -37,12 +37,14 @@ export class LoginComponent implements OnInit {
     this.credentials.password = formData.pass;
 
     this.authService.login(this.credentials).subscribe(response => {
-      this.currentUser = response;
-      localStorage.setItem('roles', response.roles.toString());
-      this.userService.getCurrentUserInfos(localStorage.getItem('username')).subscribe(a => {
-        this.userService.updateCurrentNumberOfProducts();
-      });
+      localStorage.setItem('tokenType', response.tokenType);
+      localStorage.setItem('tokenValue', response.accessToken);
       this.authService.isLoggedIn = true;
+      this.userService.getCurrentUserInfos(localStorage.getItem('username')).subscribe(user => {
+        this.currentUser = user;
+        localStorage.setItem('roles', user.roles.toString());
+        // this.userService.updateCurrentNumberOfProducts();
+      });
       this.navigationService.goingToProductList();
     });
   }

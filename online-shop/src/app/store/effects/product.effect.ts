@@ -32,7 +32,7 @@ export class ProductEffects {
     ofType<DeleteProduct>(EProductActions.DeleteProduct),
     switchMap((action) => this.productService.deleteProduct(action.id)
       .pipe(
-        map(product => ({type: EProductActions.DeleteProduct}),
+        map(product => ({type: EProductActions.DeleteProductSuccess}),
         ))
     ))
   );

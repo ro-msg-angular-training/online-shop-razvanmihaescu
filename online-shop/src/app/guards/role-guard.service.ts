@@ -10,7 +10,7 @@ export class RoleGuard implements CanActivate {
   }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    const roles = this.authService.getRoles();
+    const roles = this.authService.getRoles().toLowerCase();
     if (!roles.toString().includes(next.data.allowedRoles)) {
       this.router.navigate(['']);
       return false;

@@ -8,15 +8,17 @@ import {Cart} from '../models/OrderInput';
 })
 export class UserService {
 
+  ENDPOINT = 'http://localhost:8080/Users/';
+
   constructor(private httpClient: HttpClient) {
   }
 
   getCurrentUserInfos(username) {
-    return this.httpClient.get<User>('http://localhost:3000/users/' + username);
+    return this.httpClient.get<User>(this.ENDPOINT + username);
   }
 
   updateCurrentNumberOfProducts() {
-    this.httpClient.get<User>('http://localhost:3000/users/' + localStorage.getItem('username')).subscribe(a => {
+    this.httpClient.get<User>(this.ENDPOINT + localStorage.getItem('username')).subscribe(a => {
       let value = 0;
       a.cart.forEach(b => value += b.quantity);
       localStorage.setItem('numberOfProductsInCart', value.toString());
@@ -24,6 +26,6 @@ export class UserService {
   }
 
   updateUserCart(username, cart: Cart[]) {
-    return this.httpClient.patch('http://localhost:3000/users/' + username, {cart: cart});
+    return this.httpClient.patch(this.ENDPOINT + username, {cart: cart});
   }
 }

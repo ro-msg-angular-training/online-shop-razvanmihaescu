@@ -33,7 +33,7 @@ export class AddProductComponent implements OnInit {
       name: '',
       category: '',
       price: null,
-      image: '',
+      imageUrl: '',
       description: ''
     };
   }
@@ -42,7 +42,7 @@ export class AddProductComponent implements OnInit {
     this.newProduct.id = data.id;
     this.newProduct.name = data.name;
     this.newProduct.category = data.category;
-    this.newProduct.image = data.image;
+    this.newProduct.imageUrl = data.image;
     this.newProduct.price = data.price;
     this.newProduct.description = data.description;
     this.productService.addProduct(this.newProduct).subscribe(() => this.navigationService.goingToProductList());

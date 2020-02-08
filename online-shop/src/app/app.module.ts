@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule, RoutingComponent} from './app-routing.module';
 import {MatSliderModule} from '@angular/material/slider';
 
@@ -20,8 +20,9 @@ import {EffectsModule} from '@ngrx/effects';
 import {ProductEffects} from './store/effects/product.effect';
 import {StoreModule} from '@ngrx/store';
 import {appReducers} from './store/reducers/app.reducer';
-import {StoreDevtoolsModule} from "@ngrx/store-devtools";
-import {environment} from "../environments/environment";
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {environment} from '../environments/environment';
+import {TokenInterceptor} from './interceptors/TokenInterceptor';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,7 @@ import {environment} from "../environments/environment";
     MatTabsModule,
     MatButtonModule,
   ],
-  providers: [AuthGuard, RoleGuard],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}, AuthGuard, RoleGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

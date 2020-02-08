@@ -20,9 +20,9 @@ export const productReducers = (
       };
     }
 
-    case EProductActions.DeleteProduct: {
+    case EProductActions.DeleteProductSuccess: {
       return {
-        ...state,
+        ...state
       };
     }
 
