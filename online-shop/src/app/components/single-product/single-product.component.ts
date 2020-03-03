@@ -69,6 +69,7 @@ export class SingleProductComponent implements OnInit {
           user.cart[index].quantity++;
         }
       }
+      debugger
       this.userService.updateUserCart(localStorage.getItem('username'), user.cart).subscribe(() => {
         this.navigationService.goingToProductList();
         this.userService.updateCurrentNumberOfProducts();

@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
       this.userService.getCurrentUserInfos(localStorage.getItem('username')).subscribe(user => {
         this.currentUser = user;
         localStorage.setItem('roles', user.roles.toString());
-        // this.userService.updateCurrentNumberOfProducts();
+        this.userService.updateCurrentNumberOfProducts();
       });
       this.navigationService.goingToProductList();
     });
