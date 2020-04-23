@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Product} from '../../models/Product';
+import {Product} from '../../models/Product.model';
 import {ProductService} from '../../services/product.service';
 import {select, Store} from '@ngrx/store';
 import {IAppState} from '../../store/states/app.state';
@@ -33,8 +33,8 @@ export class ProductsComponent implements OnInit {
     this.products$.subscribe(data => {
       this.products = data;
       this.filteredProducts = data;
-      let allCategories: string[] = [];
-      data.forEach(a => allCategories.push(a.category));
+      const allCategories: string[] = [];
+      data.forEach(a => allCategories.push(a.category.name));
       this.uniqueCategories = Array.from(new Set(allCategories));
       this.uniqueCategories.unshift('All');
     });
@@ -46,7 +46,7 @@ export class ProductsComponent implements OnInit {
     if (category === 'All') {
       this.filteredProducts = this.products;
     } else {
-      this.filteredProducts = this.products.filter(a => a.category === category);
+      this.filteredProducts = this.products.filter(a => a.category.name === category);
     }
   }
 

@@ -7,7 +7,6 @@ export class TokenInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<HttpEvent<any>>, next: HttpHandler): Observable<HttpEvent<any>> {
     const loginUrl = '/Login';
-    debugger
     if (!req.url.includes(loginUrl)) {
       const tokenType = localStorage.getItem('tokenType');
       const tokenValue = localStorage.getItem('tokenValue');

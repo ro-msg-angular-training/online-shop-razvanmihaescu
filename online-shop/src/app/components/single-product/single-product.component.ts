@@ -4,13 +4,13 @@ import {ProductService} from '../../services/product.service';
 import {ShoppingCartService} from '../../services/shopping-cart.service';
 import {NavigationService} from '../../services/navigation.service';
 import {UserService} from '../../services/user.service';
-import {User} from '../../models/User';
-import {Cart} from '../../models/OrderInput';
+import {User} from '../../models/User.model';
+import {Cart} from '../../models/OrderInput.model';
 import {select, Store} from '@ngrx/store';
 import {selectSelectedProduct} from '../../store/selectors/user.selector';
 import {IAppState} from '../../store/states/app.state';
 import {DeleteProduct, GetProduct} from '../../store/actions/product.action';
-import {Product} from '../../models/Product';
+import {Product} from '../../models/Product.model';
 
 @Component({
   selector: 'app-single-product',
@@ -69,7 +69,6 @@ export class SingleProductComponent implements OnInit {
           user.cart[index].quantity++;
         }
       }
-      debugger
       this.userService.updateUserCart(localStorage.getItem('username'), user.cart).subscribe(() => {
         this.navigationService.goingToProductList();
         this.userService.updateCurrentNumberOfProducts();

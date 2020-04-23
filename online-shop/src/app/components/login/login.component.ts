@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from 'src/app/auth/auth.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Credentials} from 'src/app/models/Credentials';
+import {CredentialsModel} from 'src/app/models/Credentials.model';
 import {Router} from '@angular/router';
-import {User} from '../../models/User';
+import {User} from '../../models/User.model';
 import {NavigationService} from '../../services/navigation.service';
 import {UserService} from '../../services/user.service';
 
@@ -14,7 +14,7 @@ import {UserService} from '../../services/user.service';
 })
 export class LoginComponent implements OnInit {
   formGroup: FormGroup;
-  credentials: Credentials;
+  credentials: CredentialsModel;
   currentUser: User;
 
   constructor(private authService: AuthService, private userService: UserService, private router: Router, private navigationService: NavigationService) {

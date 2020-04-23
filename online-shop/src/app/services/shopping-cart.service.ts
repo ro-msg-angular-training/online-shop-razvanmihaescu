@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {OrderInput} from '../models/OrderInput';
+import {OrderInput} from '../models/OrderInput.model';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';

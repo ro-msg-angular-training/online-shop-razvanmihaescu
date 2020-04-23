@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {ProductService} from 'src/app/services/product.service';
-import {Product} from 'src/app/models/Product';
+import {Product} from 'src/app/models/Product.model';
 import {NavigationService} from '../../services/navigation.service';
 
 @Component({
@@ -31,7 +31,10 @@ export class AddProductComponent implements OnInit {
     this.newProduct = {
       id: null,
       name: '',
-      category: '',
+      category: {
+        name: '',
+        description: ''
+      },
       price: null,
       imageUrl: '',
       description: ''

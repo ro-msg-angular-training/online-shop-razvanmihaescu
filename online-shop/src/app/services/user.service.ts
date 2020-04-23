@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {User} from '../models/User';
-import {Cart} from '../models/OrderInput';
+import {User} from '../models/User.model';
+import {Cart} from '../models/OrderInput.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,13 +21,11 @@ export class UserService {
     this.httpClient.get<User>(this.ENDPOINT + localStorage.getItem('username')).subscribe(a => {
       let value = 0;
       a.cart.forEach(b => value += b.quantity);
-      debugger
       localStorage.setItem('numberOfProductsInCart', value.toString());
     });
   }
 
   updateUserCart(username, cart: Cart[]) {
-    debugger
     return this.httpClient.patch(this.ENDPOINT + username, cart);
   }
 }

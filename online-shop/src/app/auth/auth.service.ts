@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {Credentials} from '../models/Credentials';
+import {CredentialsModel} from '../models/Credentials.model';
 import {Observable, throwError} from 'rxjs';
-import {JWToken} from '../models/JWToken';
+import {JWToken} from '../models/JWToken.model';
 import {catchError} from 'rxjs/operators';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class AuthService {
   constructor(private httpClient: HttpClient) {
   }
 
-  login(credentials: Credentials): Observable<JWToken> {
+  login(credentials: CredentialsModel): Observable<JWToken> {
     localStorage.setItem('username', credentials.username);
     return this.httpClient.post<any>(this.API_URL, credentials).pipe(catchError(this.handleError));
   }
